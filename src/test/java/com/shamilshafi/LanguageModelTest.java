@@ -10,7 +10,7 @@ public class LanguageModelTest extends TestCase {
 
     public void testSplit() {
         try {
-            LanguageModel languageModel = new LanguageModel("test_wordninja_words.txt");
+            LanguageModel languageModel = new LanguageModel("test_wordninja_words.txt.gz");
             List<String> result = languageModel.split("seriouslybruh");
             assertEquals(result.size(), 2);
             assertEquals(result, Arrays.asList(new String[]{"seriously", "bruh"}));

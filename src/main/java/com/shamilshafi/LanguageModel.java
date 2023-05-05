@@ -3,12 +3,14 @@ package com.shamilshafi;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.zip.GZIPInputStream;
 
 public class LanguageModel {
     private HashMap<String, Double> wordCost;
@@ -16,7 +18,8 @@ public class LanguageModel {
 
     public LanguageModel(String wordFile) throws IOException {
         // Build a cost dictionary, assuming Zipf's law and cost = -Math.log(probability).
-        BufferedReader reader = new BufferedReader(new FileReader(this.getClass().getResource("/"+wordFile).getFile()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                new GZIPInputStream(this.getClass().getResourceAsStream("/"+wordFile))));
         Pattern regex = Pattern.compile("\\s+");
         List<String> words = reader.lines().collect(Collectors.toList());
         reader.close();
